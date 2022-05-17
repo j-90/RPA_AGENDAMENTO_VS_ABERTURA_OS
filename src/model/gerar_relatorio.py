@@ -13,10 +13,10 @@ def gera_relatorio():
     p.sleep(0.5)
 
     # Loop para aguardar o botão 'Preview' aparecer na tela
-    preview = p.locateCenterOnScreen(r'C:\RPA\arquivos\images\preview.png', confidence=0.95)
+    preview = p.locateCenterOnScreen(r'caminho_do_arquivo\images\preview.png', confidence=0.95)
     while preview == None:
         p.sleep(0.5)
-        preview = p.locateCenterOnScreen(r'C:\RPA\arquivos\images\preview.png', confidence=0.95)
+        preview = p.locateCenterOnScreen(r'caminho_do_arquivo\images\preview.png', confidence=0.95)
     p.sleep(1)
 
     # Calculando a data inicial e final da semana corrente, inserindo nos respectivos campos e clicando no botão 'Preview'
@@ -40,16 +40,16 @@ def gera_relatorio():
     p.typewrite(dia + mes + ano)
     p.sleep(1)
 
-    preview = p.locateCenterOnScreen(r'C:\RPA\arquivos\images\preview.png', confidence=0.95)
+    preview = p.locateCenterOnScreen(r'caminho_do_arquivo\images\preview.png', confidence=0.95)
     if preview != None:
         p.click(preview.x, preview.y)
     p.sleep(1)
 
     # Loop para aguardar o relatório aparecer na tela
-    agendamento_servicos = p.locateCenterOnScreen(r'C:\RPA\arquivos\images\agendamento_servicos_analitico_todos.png', confidence=0.95)
+    agendamento_servicos = p.locateCenterOnScreen(r'caminho_do_arquivo\images\agendamento_servicos_analitico_todos.png', confidence=0.95)
     while agendamento_servicos == None:
         p.sleep(1)
-        agendamento_servicos = p.locateCenterOnScreen(r'C:\RPA\arquivos\images\agendamento_servicos_analitico_todos.png', confidence=0.95)
+        agendamento_servicos = p.locateCenterOnScreen(r'caminho_do_arquivo\images\agendamento_servicos_analitico_todos.png', confidence=0.95)
     p.sleep(0.5)
 
     p.hotkey('alt', 'i')
@@ -60,7 +60,7 @@ def gera_relatorio():
     p.sleep(0.5)
     p.press('enter')
     p.sleep(0.5)
-    p.typewrite('C:\\RPA\\arquivos\\Agendamento_de_Servicos_Jangada_Renault')
+    p.typewrite('caminho_do_arquivo\\nome_do_arquivo')
     p.sleep(0.5)
     p.press('enter')
 

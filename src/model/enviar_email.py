@@ -27,7 +27,7 @@ import time
 # Documentação do Protocolo Oauth 2.0 -> : https://developers.google.com/gmail/imap/xoauth2-protocol
 # Repositório do GitHub do Google com uso do Oauth 2.0 em Python -> https://github.com/google/gmail-oauth2-tools/blob/master/python/oauth2.py
 
-credenciais = open('C:\\RPA\\credenciais\\credenciais_gmail_oauth.txt', 'r')
+credenciais = open('caminho_do_arquivo\\credenciais_gmail_oauth.txt', 'r')
 chaves = credenciais.readlines()
 credenciais.close()
 
@@ -133,11 +133,11 @@ def refresh_authorization(google_client_id, google_client_secret, refresh_token)
 
 
 # Tuplas com os emails para envio da confirmação da ocorrência
-JANGADA_VEICULOS_emails = ('daniel@carmais.com.br')
+nome_tupla = ('email@email.com')
 
-TESTE_emails = ('jeferson.melo@carmais.com.br')
+TESTE_emails = ('seuemail@seuemail.com')
 
-dict_envio = {'JANGADA VEICULOS': JANGADA_VEICULOS_emails, 'TESTE': TESTE_emails}
+dict_envio = {'KEY NAME': nome_tupla, 'TESTE': TESTE_emails}
 
 def envia_email():
     # Obtendo o período da mês em formato de string
@@ -152,28 +152,28 @@ def envia_email():
 
     # Inserindo o nome do bot no email
     body = f"""
-    <p><b>RPA - Agendamento vs Abertura de OS - Jangada Veículos</b></p>
+    <p><b>RPA - Agendamento vs Abertura de OS</b></p>
     <br>
     <br>
     """
 
     # Gerando a tabela HTML para inserir no corpo do email
     print('Convertendo a planilha XLSX em HTML...\n')
-    df2 = pd.read_excel('C:\\RPA\\arquivos\\Agendamento_de_Servicos_Jangada_Renault.xlsx', dtype=str)
+    df2 = pd.read_excel('caminho_do_arquivo\\nome_do_arquivo.xlsx', dtype=str)
     tabela = df2.to_html(justify = 'center', index = False, na_rep='')
-    with open('C:\\RPA\\arquivos\\tabela.html', 'w') as tabela_1:
+    with open('caminho_do_arquivo\\tabela.html', 'w') as tabela_1:
         tabela_1.write(tabela)
     print('Arquivo HTML gerado!\n')
     p.sleep(1)
 
     # Inserindo email e senha
     print('Enviando email...\n')
-    remetente = 'rpa.carmais@gmail.com'
+    remetente = 'seu email aqui'
     # get the password in the gmail (manage your google account, click on the avatar on the right)
     # then go to security (right) and app password (center)
     # insert the password and then choose mail and this computer and then generate
     # copy the password generated here
-    password = 'Carmais@2020'
+    password = 'sua senha aqui'
 
     receiver = dict_envio['TESTE']
 
@@ -186,14 +186,14 @@ def envia_email():
     message = MIMEMultipart('related')
     message['From'] = remetente
     message['To'] = receiver
-    message['Subject'] = 'RPA - Agendamento vs Abertura de OS - Jangada Veículos' + ' ' + f'({dia_setData}/{mes_setData}/{ano_setData} - {data_em_texto})'
+    message['Subject'] = 'RPA - Agendamento vs Abertura de OS' + ' ' + f'({dia_setData}/{mes_setData}/{ano_setData} - {data_em_texto})'
 
     # Anexando a mensagem alternativa
     msgAlternative = MIMEMultipart('alternative')
     # Mensagem Alternativa está sendo jogada no message (root-principal)
     message.attach(msgAlternative)
 
-    msgText = MIMEText(f'RPA - Agendamento vs Abertura de OS - Jangada Veículos')
+    msgText = MIMEText(f'RPA - Agendamento vs Abertura de OS')
     msgAlternative.attach(msgText)  # msgText é jogada na mensagem alternativa
 
     # Inserindo a tabela no formato HTML no corpo do email
@@ -218,9 +218,9 @@ def envia_email():
     session.sendmail(remetente, receiver.split(","), text)
     session.quit()
 
-    os.remove('C:\\RPA\\arquivos\\tabela.html')
-    os.remove('C:\\RPA\\arquivos\\Agendamento_de_Servicos_Jangada_Renault.xlsx')
-    os.remove('C:\\RPA\\arquivos\\Agendamento_de_Servicos_Jangada_Renault.XLS')
+    os.remove('caminho_do_arquivo\\tabela.html')
+    os.remove('caminho_do_arquivo\\nome_do_arquivo.xlsx')
+    os.remove('caminho_do_arquivo\\nome_do_arquivo.XLS')
 
     logging.debug('Email enviado e arquivos excluidos!')
     print('Email enviado e arquivos excluidos!')
