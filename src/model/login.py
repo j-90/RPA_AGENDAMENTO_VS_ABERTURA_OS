@@ -3,7 +3,7 @@ import os
 
 
 def login_sistema(): 
-    # Abrindo o módulo oficina do Dealer e realizando o login
+    # Abrindo o sistema e realizando o login
     credenciais = open('caminho_do_arquivo\\login.txt','r')
     chaves = credenciais.readlines()
     credenciais.close()
@@ -15,7 +15,7 @@ def login_sistema():
     os.startfile("caminho_do_arquivo\executavel.exe")
     p.sleep(3)
 
-    # Inserindo as credenciais de usuário e senha do Dealer
+    # Inserindo as credenciais de usuário e senha
     usuario = p.locateCenterOnScreen('caminho_do_arquivo/images/usuario.png',confidence = 0.95)
     if usuario != None:
         p.click(usuario.x+203,usuario.y)
@@ -41,7 +41,7 @@ def login_sistema():
     # p.press('tab')
     # p.press('enter')
 
-    # Loop para aguardar o carregamento do banco de dados do Dealer
+    # Loop para aguardar o carregamento do banco de dados do sistema
     cancelar = p.locateCenterOnScreen('caminho_do_arquivo/images/cancelar.png', confidence = 0.95)
     while cancelar != None:
         p.sleep(0.5)
