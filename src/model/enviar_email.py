@@ -177,8 +177,6 @@ def envia_email():
 
     receiver = dict_envio['TESTE']
 
-    # receiver = dict_envio['JANGADA VEICULOS']
-
     access_token, expires_in = refresh_authorization(GOOGLE_CLIENT_ID, GOOGLE_CLIENT_SECRET, GOOGLE_REFRESH_TOKEN)
     auth_string = generate_oauth2_string(remetente, access_token, as_base64=True)
 
