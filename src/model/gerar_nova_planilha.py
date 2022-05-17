@@ -51,7 +51,7 @@ def gera_nova_planilha():
     p.sleep(1) 
 
     # Criando uma nova coluna para armazenar o status de diferença entre a data 1 e a data 2
-    print('Comparando as datas de agendamento e de abertura da OS...\n')
+    print('Comparando as datas 1 e 2...\n')
     lista_pontualidade = []
     lista_auxiliar = zip(lista1, lista2)
     for elemento in lista_auxiliar:
