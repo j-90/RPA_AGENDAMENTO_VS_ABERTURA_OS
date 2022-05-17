@@ -26,34 +26,34 @@ def gera_nova_planilha():
     print('Colunas removidas!\n')
     p.sleep(1)
 
-    # # Deletando as linhas que estão vazias na coluna 'os_dtaber'
+    # # Deletando as linhas que estão vazias na coluna 'coluna2'
     print('Removendo as linhas vazias...\n')
     df1.dropna(axis=0, subset=['nome_da_linha_vazia'], inplace=True)
     print('Linhas vazias removidas!\n')
     p.sleep(1)
 
-    # Removendo a hora zerada contida nas colunas 'ag_dt' e 'os_dtaber' e formatando a data
+    # Removendo a hora zerada contida nas colunas 'coluna1' e 'coluna2' e formatando a data
     print('Selecionando apenas a data dos campos de data de agendamento e data de abertura da OS...\n')
 
-    lista_agendamento = [str(x)[:10] for x in df1['nome_da_coluna']]
-    lista_abertura_os = [str(x)[:10] for x in df1['nome_da_outra_coluna']]
+    lista1= [str(x)[:10] for x in df1['coluna1']]
+    lista2= [str(x)[:10] for x in df1['coluna2']]
 
     print('Salvando apenas as datas nas respectivas colunas...\n')
 
-    df1['nome_da_coluna'] = lista_agendamento
-    df1['nome_da_outra_coluna'] = lista_abertura_os
-    for data_agendamento in lista_agendamento:
-        data_agendamento.replace('%y-%m-%d', '%d/%m/%y')
-    for data_abertura_os in lista_abertura_os:
-        data_abertura_os.replace('%y-%m-%d', '%d/%m/%y')
+    df1['coluna1'] = lista1
+    df1['coluna2'] = lista2
+    for data_1 in lista1:
+        data_1.replace('%y-%m-%d', '%d/%m/%y')
+    for data_2 in lista2:
+        data_2.replace('%y-%m-%d', '%d/%m/%y')
 
     print('Colunas de data de agendamento e data de abertura da OS atualizadas!\n')
     p.sleep(1) 
 
-    # Criando uma nova coluna para armazenar o status de diferença entre a data de agendamento e a data de abertura
+    # Criando uma nova coluna para armazenar o status de diferença entre a data 1 e a data 2
     print('Comparando as datas de agendamento e de abertura da OS...\n')
     lista_pontualidade = []
-    lista_auxiliar = zip(lista_agendamento, lista_abertura_os)
+    lista_auxiliar = zip(lista1, lista2)
     for elemento in lista_auxiliar:
         if datetime.strptime(elemento[0], '%d/%m/%Y').date().toordinal()  >= datetime.strptime(elemento[1], '%d/%m/%Y').date().toordinal():
             lista_pontualidade.append('Ok')
